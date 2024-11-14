@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Registration</h2>
+    <form action="/signup/" method="POST">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="first">First Name</label>
+            <input type="text" class="form-control" id="first" name="first" placeholder="Enter your first name" />
+        </div>
+
+        <div class="form-group">
+            <label for="last">Last Name</label>
+            <input type="text" class="form-control" id="last" name="last" required placeholder="Enter your last name" />
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email" required placeholder="Enter your email" />
+        </div>
+
+        <div class="form-group">
+            <label for="mobile">Mobile Number</label>
+            <input type="tel" class="form-control" id="mobile" name="mobile" maxlength="10" required placeholder="Enter your mobile number" />
+        </div>
+
+        <div class="form-group">
+            <label for="password">Enter Your Password</label>
+            <input type="password" class="form-control" id="password" name="password" required placeholder="Enter your password" />
+        </div>
+
+        <button type="submit" class="btn SignUpButton">Submit</button>
+    </form>
+</div>
+{% endblock %}
+``
+

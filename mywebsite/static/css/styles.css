@@ -1,0 +1,274 @@
+/* Simple reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
+header {
+    background-color: #e77ca0;
+    color: white;
+    padding: 10px 0;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+main {
+    padding: 20px;
+    text-align: center;
+}
+
+.product-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.product-item {
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 15px;
+    width: 300px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.product-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+#footerID {
+    background-color: #e77ca0 !important;
+    margin-top: 195px;
+    margin-bottom: 0px;
+}
+#FooterPara
+{
+    font-family: 'Georgia', serif;
+    font-size: 1.2em;
+    line-height: 1.5;
+    color: #e6eced;
+    text-align: center;
+    margin-top: -25px;
+    margin-bottom: 0px;
+}
+#h3ID {
+font-size: 1.10rem;
+}
+.addTOCart{
+background-color: #e77ca0;
+    color: #fff;
+    border: none;
+    padding: 2px 15px;
+    font-size: 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+/***********************NAV**********************************/
+nav ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+}
+
+/* Style for the logo */
+nav ul .logo {
+    flex-grow: 1;
+    text-align: center;
+}
+
+/* Ensure the logo has a fixed size */
+nav ul .logo img {
+    height: 100px;
+    width: 100px;
+}
+
+/* Align "Register" and "Login" to the right */
+nav ul .right {
+    margin-left: auto;
+}
+
+/* Keep "Register" and "Login" next to each other */
+nav ul .right ~ .right {
+    margin-left: 0;
+}
+
+/*****************************************************************/
+/* Style for the main heading */
+h1 {
+    font-family: 'Arial', sans-serif;
+    font-size: 2.5em;
+    text-align: center;
+    color: #e77ca0;
+    margin-top: 30px;
+}
+
+/* Style for the description paragraph */
+p {
+    font-family: 'Georgia', serif;
+    font-size: 1.2em;
+    line-height: 1.5;
+    color: #00BCD4;
+    text-align: center;
+    margin-top: -5px;
+}
+
+/* Style for the small text */
+small {
+    font-family: 'Verdana', sans-serif;
+    font-size: -0.1em;
+    color: #795548;
+    text-align: justify;
+    display: block;
+    margin: 2px 50px;
+    line-height: 1.6;
+}
+}
+
+/* Optional: Add background color or padding to the container */
+body {
+    background-color: #f9f9f9;
+    padding: 20px;
+}
+
+form {
+        max-width: 600px;
+    margin: 30px auto;
+    padding: 25px;
+    border: 5px solid #e77ca0;
+
+    /* border-radius: 0px; */
+    /* box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.1); */
+    /* background-color: #e77ca059#e77ca;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="mobile"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    /* Ensure the form layout is responsive */
+    @media (max-width: 600px) {
+        form {
+            padding: 15px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="mobile"] {
+            padding: 8px;
+        }
+
+        button {
+            padding: 8px 16px;
+            font-size: 14px;
+        }
+    }
+
+.loginButton
+{
+    color: #fff;
+    background-color: #e77ca0;
+    border-color: #e77ca0;
+    margin-top: 20px;
+}
+
+.SignUpButton
+{
+    color: #fff;
+    background-color: #e77ca0;
+    border-color: #e77ca0;
+}
+.RegisterButton
+{
+    font-weight: 400;
+    color: #e77ca0;
+    text-decoration: none;
+
+}
+label {
+    text-align: left;
+    display: block; /* Ensures the label takes up the full width and moves to the next line */
+    margin-bottom: 5px; /* Adds some space between the label and the input */
+}
+.product-description {
+    font-size: 1.1rem; /* Slightly larger font size */
+    line-height: 1.6; /* Increase line spacing */
+    color: #555; /* Softer gray text color */
+    text-align: justify; /* Justified text alignment */
+    margin-bottom: 20px; /* Add margin below the paragraph */
+}
+.product-descriptions {
+    font-size: 1.2rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+#FormId, #FormsId {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 25px;
+
+}

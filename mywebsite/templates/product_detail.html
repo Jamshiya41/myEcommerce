@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block title %}Product Details{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row">
+        <!-- Image Section -->
+        <div class="col-md-6">
+            <img src="{{ product.image.url }}" class="img-fluid rounded" alt="{{ product.name }}">
+        </div>
+
+        <!-- Product Details Section -->
+        <div class="col-md-6 product-details">
+    <h1 class="display-4">{{ product.name }}</h1>
+    <p class="text-muted">Price: <strong>AED {{ product.price }}</strong></p>
+    <p class="text-muted product-description">{{ product.description }}</p>
+
+    <!-- Form for selecting color and size -->
+    <form method="post" action="{% url 'add_to_cart' product.id %}">
+        {% csrf_token %}
+
+        <!-- Size Selection -->
+<!--        {% if available_sizes %}-->
+<!--            <div class="form-group">-->
+<!--                <label class="form-label d-block">Available Sizes:</label>-->
+<!--                <div class="btn-group btn-group-toggle" data-toggle="buttons">-->
+<!--                    {% for size in available_sizes %}-->
+<!--                        <label class="btn btn-outline-secondary">-->
+<!--                            <input type="radio" name="size" id="size_{{ size }}" value="{{ size_id }}" autocomplete="off" required> {{ size }}-->
+<!--                        </label>-->
+<!--                    {% endfor %}-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        {% else %}-->
+<!--            <p class="text-warning">No sizes available.</p>-->
+<!--        {% endif %}-->
+
+<!--        &lt;!&ndash; Color Selection &ndash;&gt;-->
+<!--        {% if available_colors %}-->
+<!--            <div class="form-group mt-3">-->
+<!--                <label class="form-label d-block">Available Colors:</label>-->
+<!--                <div class="btn-group btn-group-toggle" data-toggle="buttons">-->
+<!--                    {% for color in available_colors %}-->
+<!--                        <label class="btn btn-outline-secondary">-->
+<!--                            <input type="radio" name="color" id="color_{{ color }}" value="{{ color_id }}" autocomplete="off" required> {{ color }}-->
+<!--                        </label>-->
+<!--                    {% endfor %}-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        {% else %}-->
+<!--            <p class="text-warning">No colors available.</p>-->
+<!--        {% endif %}-->
+
+<!--        &lt;!&ndash; Variant Information &ndash;&gt;-->
+<!--        <div class="variant-info mt-4">-->
+<!--            <h4>Available Variants</h4>-->
+<!--            <ul class="list-group">-->
+<!--                {% for variant in avail_variant %}-->
+<!--                    <li class="list-group-item d-flex justify-content-between align-items-center">-->
+<!--                        {{ variant.size.name }} / {{ variant.color.name }} - -->
+<!--                        <span class="badge badge-secondary">{{ variant.quantity }} in stock</span>-->
+<!--                    </li>-->
+<!--                {% endfor %}-->
+<!--            </ul>-->
+<!--        </div>-->
+
+
+        <!-- Variant Selection as Radio Buttons -->
+        <div class="form-group mt-4">
+            <label class="form-label d-block">Choose Variant:</label>
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                {% for variant in avail_variant %}
+                    <label class="btn btn-outline-secondary">
+                        <input type="radio" name="variant" id="variant_{{ variant.id }}" value="{{ variant.id }}" autocomplete="off" required>
+                        {{ variant.size.name }} / {{ variant.color.name }} - Stock: {{ variant.quantity }}
+                    </label>
+                {% endfor %}
+            </div>
+        </div>
+
+
+
+        <!-- Add to Cart Button -->
+        <button type="submit" class="btn btn-primary mt-4 add-to-cart w-100">Add to Cart</button>
+    </form>
+</div>
+
+    </div>
+</div>
+
+{% endblock %}

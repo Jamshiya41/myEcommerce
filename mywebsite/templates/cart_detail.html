@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+
+{% block title %}Cart Details{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">Your Cart</h1>
+
+    {% if items %}
+        <ul class="list-group mb-3">
+            {% for item in items %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                   <span>
+                        {{ item.product.name }}<br>
+
+                        {% if item.product_variant.size %}
+                            Size: "{{ item.product_variant.size }}"
+                        {% else %}
+
+                        {% endif %}
+                        <br>
+
+                        {% if item.product_variant.color %}
+                            Color: "{{ item.product_variant.color }}"
+                        {% else %}
+
+                        {% endif %}
+                    </span><br>
+                    <div class="col-lg-2">
+                       <div class="input-group input-group-sm"> <!-- Small input group -->
+                        <!-- Decrement button -->
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-danger btn-sm btn-number" onclick="updateCart('{{ item.id }}', 'decrement')">-</button>
+                        </span>
+
+                        <!-- Quantity input (centered and inline) -->
+                        <input type="text" id="quantity-{{ item.id }}" name="quantity" class="form-control text-center" value="{{ item.quantity }}" min="1" max="100" readonly>
+
+                        <!-- Increment button -->
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-success btn-sm btn-number" onclick="updateCart('{{ item.id }}', 'increment')">+</button>
+                        </span>
+                    </div>
+
+                    </div>
+                    <span class="text-muted">AED {{ item.get_total_price }}</span>
+                     <button type="button" class="btn btn-danger" onclick="removeCartItem('{{ item.id }}')">Remove</button>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <div class="d-flex justify-content-between align-items-center">
+            <h4>Total: AED {{ total_price }}</h4>
+            <a href="{% url 'checkout' %}" class="btn btn-success btn-lg">Proceed to Checkout</a>
+        </div>
+    {% else %}
+        <div class="alert alert-warning" role="alert">
+            <p class="mb-0">Your cart is empty.</p>
+        </div>
+    {% endif %}
+</div>
+<script>
+  function updateCart(itemId, action) {
+    // URL of the endpoint for incrementing or decrementing
+    let url = '';
+
+    // Decide the URL based on the action
+    if (action === 'increment') {
+        url = `/cart/increment/${itemId}/`;  // Adjust this URL as per your routing
+    } else if (action === 'decrement') {
+        url = `/cart/decrement/${itemId}/`;  // Adjust this URL as per your routing
+    }
+
+    // Perform the AJAX request
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken'),  // CSRF token
+            'Content-Type': 'application/json',
+        },
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.success) {
+            // Update the quantity in the UI
+            document.getElementById(`quantity-${itemId}`).value = data.new_quantity;
+
+            // Reload the page to reflect updates or redirect to a specific URL
+            window.location.reload(); // or use window.location.href = '/your-redirect-url/';
+        } else {
+            console.error('Error updating cart:', data.error);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+
+
+// Function to get the CSRF token from cookies
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+function removeCartItem(itemId) {
+    const url = `/cart/remove/${itemId}/`;  // Adjust URL based on your route
+
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken'),
+            'Content-Type': 'application/json',
+        },
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.success) {
+            // Optionally, reload the page or remove the item element from the DOM
+            location.reload();
+        } else {
+            console.error('Error removing item:', data.error);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+</script>
+{% endblock %}
